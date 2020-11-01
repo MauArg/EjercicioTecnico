@@ -1,25 +1,19 @@
 package ar.com.churrasco.Ejercicio.entidad;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class MensajeEntrante {
-	private String cabecera;
-	private List<Campo> campos;
+	HashMap<Integer, String> campos;
 
-	public String getCabecera() {
-		return cabecera;
-	}
-
-	public void setCabecera(String cabecera) {
-		this.cabecera = cabecera;
-	}
-
-	public List<Campo> getCampos() {
+	public HashMap<Integer, String> getCampos() {
 		return campos;
 	}
 
-	public void setCampos(List<Campo> campos) {
+	public void setCampos(HashMap<Integer, String> campos) {
 		this.campos = campos;
 	}
+	
+	
 
 }

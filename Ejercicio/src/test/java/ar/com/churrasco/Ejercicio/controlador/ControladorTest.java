@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ar.com.churrasco.Ejercicio.entidad.Campo;
 import ar.com.churrasco.Ejercicio.entidad.MensajeEntrante;
 
-@WebMvcTest(ControladorTest.class)
+@WebMvcTest(ConvertidorControlador.class)
 public class ControladorTest {
 
 	@Autowired
@@ -28,17 +29,18 @@ public class ControladorTest {
 	@Test
 	public void controladorTestBasico() throws Exception {
 		// Creamos el mensaje
-		MensajeEntrante mensaje = new MensajeEntrante();
-		mensaje.setCampos(
-				Arrays.<Campo>asList(new Campo((byte) 2, "12346578901234567"), new Campo((byte) 28, "20201005")));
+		HashMap<Integer, String> valores = new HashMap<Integer, String>();
+		valores.put(2, "12346578901234567");
+		valores.put(28, "20201005");
 
-		// Configuramos el request POST
-		RequestBuilder request = MockMvcRequestBuilders.post("/convertidor-mensajes").content(jsonToString(mensaje))
-				.accept(MediaType.APPLICATION_JSON);
-
-		// Obtenemos la respuesta y la verificamos
+//		// Configuramos el request POST
+		RequestBuilder request = MockMvcRequestBuilders.post("/convertidor-mensajes").content(jsonToString(valores))
+				.accept(MediaType.TEXT_PLAIN);
+//
+//		// Obtenemos la respuesta y la verificamos
 		MvcResult result = mockMvc.perform(request).andExpect(status().isOk())
 				.andExpect(content().string("4000001000000000171234657890123456720201005")).andReturn();
+
 	}
 
 	private String jsonToString(final Object obj) {
