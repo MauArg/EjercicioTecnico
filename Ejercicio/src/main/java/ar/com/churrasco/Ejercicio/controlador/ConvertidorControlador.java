@@ -1,15 +1,23 @@
 package ar.com.churrasco.Ejercicio.controlador;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import java.util.HashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import ar.com.churrasco.Ejercicio.servicio.ConvertidorServicioImpl;
 
 @RestController
 public class ConvertidorControlador {
 
+	@Autowired
+	ConvertidorServicioImpl servicio;
+
 	@PostMapping("/convertidor-mensajes")
-	public String convertirMensaje() {
-		return "4000001000000000171234657890123456720201005";
+	public String convertirMensaje(@RequestBody HashMap<Integer, String> valores) {
+		return servicio.convertirMensaje(valores);
 	}
 
 }

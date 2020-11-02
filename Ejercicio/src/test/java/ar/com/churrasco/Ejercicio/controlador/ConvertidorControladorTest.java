@@ -21,7 +21,7 @@ import ar.com.churrasco.Ejercicio.entidad.Campo;
 import ar.com.churrasco.Ejercicio.entidad.MensajeEntrante;
 
 @WebMvcTest(ConvertidorControlador.class)
-public class ControladorTest {
+public class ConvertidorControladorTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -35,7 +35,7 @@ public class ControladorTest {
 
 //		// Configuramos el request POST
 		RequestBuilder request = MockMvcRequestBuilders.post("/convertidor-mensajes").content(jsonToString(valores))
-				.accept(MediaType.TEXT_PLAIN);
+				.accept(MediaType.APPLICATION_JSON);
 //
 //		// Obtenemos la respuesta y la verificamos
 		MvcResult result = mockMvc.perform(request).andExpect(status().isOk())
